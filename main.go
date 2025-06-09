@@ -6,7 +6,7 @@ import (
 	"time"
 
 	"github.com/MosinFAM/worker-pool/logger"
-	pool "github.com/MosinFAM/worker-pool/worker-pool"
+	pool "github.com/MosinFAM/worker-pool/workerpool"
 )
 
 func main() {
