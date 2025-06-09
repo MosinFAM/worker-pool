@@ -6,7 +6,7 @@ import (
 	"time"
 
 	"github.com/MosinFAM/worker-pool/logger"
-	"github.com/MosinFAM/worker-pool/worker-pool"
+	pool "github.com/MosinFAM/worker-pool/worker-pool"
 )
 
 func main() {
@@ -34,5 +34,7 @@ func main() {
 	sig := make(chan os.Signal, 1)
 	signal.Notify(sig, os.Interrupt)
 	<-sig
+	println("\nReceived interrupt signal, shutting down...")
 	wp.StopAll()
+	println("Clean shutdown completed")
 }

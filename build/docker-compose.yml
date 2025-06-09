@@ -1,0 +1,7 @@
+services:
+  worker:
+    build:
+      context: ..
+      dockerfile: build/Dockerfile
+    container_name: worker_pool
+    restart: unless-stopped

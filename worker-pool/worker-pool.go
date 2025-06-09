@@ -46,6 +46,11 @@ func (wp *WorkerPool) AddWorker() {
 	wp.workers[id] = worker
 
 	wp.wg.Add(1)
+	logger.LogInfo("Worker added", logrus.Fields{
+		"worker_id": id,
+		"total":     len(wp.workers),
+	})
+
 	go func(w *Worker) {
 		defer wp.wg.Done()
 		logger.LogInfo("Worker started", logrus.Fields{"worker_id": w.id})
@@ -74,7 +79,10 @@ func (wp *WorkerPool) RemoveWorker() {
 	for id, worker := range wp.workers {
 		worker.cancel()
 		delete(wp.workers, id)
-		logger.LogInfo("Worker removed", logrus.Fields{"worker_id": id})
+		logger.LogInfo("Worker removal initiated", logrus.Fields{
+			"worker_id": id,
+			"remaining": len(wp.workers) - 1,
+		})
 		break
 	}
 }
